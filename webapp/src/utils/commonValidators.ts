@@ -24,8 +24,6 @@ export const commonPasswordValidation = (password: string): string | null => {
 export const commonUrlValidation = (url: string): string | null => {
   let error = null;
 
-  console.log('validate this', url);
-
   if (!url) error = 'The url field is required.';
   else if (!URL_REGEX.test(url)) error = 'Please enter a valid url, e.g https://google.com';
 

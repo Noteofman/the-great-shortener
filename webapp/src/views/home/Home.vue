@@ -124,10 +124,7 @@ export default defineComponent({
   methods: {
     ...mapActions({ registerUser: 'registerUser', createLink: 'createLink' }),
     async onLinkSubmit() {
-      console.log(this.url);
       const error = commonUrlValidation(this.url);
-
-      console.log('error is ', error);
 
       if (error) {
         this.urlError = error;
