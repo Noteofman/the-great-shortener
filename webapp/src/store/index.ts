@@ -46,7 +46,7 @@ const store = createStore<State>({
       state.shortenedLinks = [];
     },
     setShortenedLinks(state, payload: Array<LinkObj>) {
-      let concat: Array<LinkObj> = [...state.shortenedLinks, ...payload];
+      let concat: Array<LinkObj> = [...payload, ...state.shortenedLinks];
 
       concat = concat.filter((v, i, a) => a.findIndex(
         (t) => (t.linkId === v.linkId),

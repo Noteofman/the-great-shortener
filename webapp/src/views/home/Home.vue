@@ -172,6 +172,7 @@ export default defineComponent({
 .saved-link-row {
   min-height: 140px;
   padding: 24px;
+  overflow-wrap: break-word;
 }
 
 .copy-button {
