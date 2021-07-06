@@ -1,0 +1,11 @@
+{
+  "name": "the-great-shortener",
+  "version": "1.0.0",
+  "description": "PrimaryBid technical task",
+  "scripts": {
+    "development": "docker-compose -f docker-compose-development.yml up  --build"
+  },
+  "author": "Daniel Forsdike",
+  "license": "MIT",
+  "dependencies": {}
+}

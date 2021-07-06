@@ -1,0 +1,101 @@
+.form-wrapper {
+    max-width: 30%;
+    min-width: 300px;
+    padding: 50px 30px 50px 30px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
+}
+
+.form-group {
+    position:relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-label {
+    position: absolute;
+    left: 0;
+    top: 12px;
+    color: #35363a;
+    background-color: #fff;
+    z-index: 10;
+    margin-left: 8px;
+    transition: transform 150ms ease-out, font-size 150ms ease-out;
+    cursor: text;
+}
+
+.form-input {
+    position: relative;
+    padding: 12px 8px;
+    width: 100%;
+    font-size: 14px;
+    outline: 0;
+    border: 2px solid #00000052;
+    border-radius: 0.25rem;
+}
+
+.form-input:focus + .form-label, .form-input:not(:placeholder-shown) + .form-label {
+    transform: translateY(-20px);
+    font-size: 14px;
+    color: #565861;
+}
+
+.form-input:focus {
+    border: solid 2px #017bfe;
+}
+
+.form-input.filled {
+    border: solid 2px #017bfe;
+}
+
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover,
+.form-input:-webkit-autofill:focus,
+.form-input:-webkit-autofill:active
+{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.tm-link {
+    cursor: pointer;
+    position: relative;
+    font-size: 1rem;
+    line-height: 20px;
+    letter-spacing: -.5px;
+    color: #000;
+    text-decoration: none;
+}
+
+.tm-link:after {
+     content: '';
+     position: absolute;
+     left: 0;
+     bottom: -5px;
+     width: 0px;
+     height: 3px;
+     background-color: #3EA9E1;
+     transition: .4s width linear;
+ }
+
+.tm-link.left:after,
+.tm-link.center:after,
+.tm-link.right:after {
+     width: 20px;
+ }
+
+.tm-link.center:after {
+     left: 50%;
+     transform: translateX(-50%);
+ }
+
+.tm-link.right:after  {
+     left: auto;
+     right: 0;
+ }
+
+.tm-link:hover:after {
+    width: 100%;
+}
+

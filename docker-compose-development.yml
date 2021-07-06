@@ -1,0 +1,46 @@
+version: "3.8"
+
+networks:
+  api:
+  client:
+services:
+  server:
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    build:
+      context: ./server/
+      dockerfile: Dockerfile
+    container_name: urlShortnerServer
+    restart: always
+    volumes:
+      - ./server:/server
+      - /server/node_modules/
+    ports:
+      - '3000:3000'
+    depends_on: [mongo]
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - api
+      - client
+  mongo:
+    container_name: urlShortnerMongoDb
+    image: mongo
+    ports:
+      - '27018:27017'
+    networks:
+      - api
+  webapp:
+    build:
+      context: ./webapp/
+      dockerfile: Dockerfile
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./webapp:/webapp
+    container_name: urlShortnerWebapp
+    restart: always
+    networks:
+      - client
+    ports:
+      - '8080:8080'

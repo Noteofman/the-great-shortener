@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="270decac-3809-4837-b1a3-cd926c3ebd2c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/webapp/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/src/store/getDefaultState.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/src/style/base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/src/style/buttons.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/src/style/input.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/src/style/spacing.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/src/style/typography.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/src/style/utils.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/src/types/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/src/views/Header.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/src/views/home/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp/src/components/HelloWorld.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/src/router/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/src/store/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp/src/views/About.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/src/views/home/Home.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="Vue Single File Component" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/webapp" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+  </component>
+  <component name="ProjectId" id="1uoQiWykviuWaB6aroJ8aIPfuR4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/server" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/webapp/node_modules/typescript/lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/webapp/src/views" />
+      <recent name="$PROJECT_DIR$/webapp/src/views/home" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="270decac-3809-4837-b1a3-cd926c3ebd2c" name="Default Changelist" comment="" />
+      <created>1625329589651</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1625329589651</updated>
+      <workItem from="1625329590776" duration="818000" />
+      <workItem from="1625351268285" duration="2398000" />
+      <workItem from="1625355507790" duration="264000" />
+      <workItem from="1625394605516" duration="6056000" />
+      <workItem from="1625405792828" duration="1184000" />
+      <workItem from="1625407003958" duration="28942000" />
+      <workItem from="1625443566695" duration="340000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="475" y="191" key="#ESLint" timestamp="1625443719887">
+      <screen x="73" y="25" width="1367" height="875" />
+    </state>
+    <state x="475" y="191" key="#ESLint/73.25.1367.875@73.25.1367.875" timestamp="1625443719887" />
+    <state x="226" y="121" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1625410082753">
+      <screen x="81" y="25" width="1359" height="875" />
+    </state>
+    <state x="226" y="121" key="#com.intellij.execution.impl.EditConfigurationsDialog/81.25.1359.875@81.25.1359.875" timestamp="1625410082753" />
+    <state x="487" y="261" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1625355543889">
+      <screen x="81" y="25" width="1359" height="875" />
+    </state>
+    <state x="479" y="261" key="#com.intellij.fileTypes.FileTypeChooser/70.25.1370.875@70.25.1370.875" timestamp="1625351680364" />
+    <state x="487" y="261" key="#com.intellij.fileTypes.FileTypeChooser/81.25.1359.875@81.25.1359.875" timestamp="1625355543889" />
+    <state x="307" y="120" key="SettingsEditor" timestamp="1625443802209">
+      <screen x="73" y="25" width="1367" height="875" />
+    </state>
+    <state x="307" y="120" key="SettingsEditor/73.25.1367.875@73.25.1367.875" timestamp="1625443802209" />
+    <state x="256" y="146" key="SettingsEditor/77.25.1363.875@77.25.1363.875" timestamp="1625423304391" />
+    <state x="259" y="146" key="SettingsEditor/81.25.1359.875@81.25.1359.875" timestamp="1625406972136" />
+    <state x="183" y="125" width="1157" height="675" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1625352932594">
+      <screen x="70" y="25" width="1370" height="875" />
+    </state>
+    <state x="183" y="125" width="1157" height="675" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/70.25.1370.875@70.25.1370.875" timestamp="1625352932594" />
+    <state x="183" y="125" width="1157" height="675" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1625352932595">
+      <screen x="70" y="25" width="1370" height="875" />
+    </state>
+    <state x="183" y="125" width="1157" height="675" key="com.intellij.history.integration.ui.views.FileHistoryDialog/70.25.1370.875@70.25.1370.875" timestamp="1625352932595" />
+    <state x="443" y="208" width="628" height="508" key="find.popup" timestamp="1625439218351">
+      <screen x="73" y="25" width="1367" height="875" />
+    </state>
+    <state x="443" y="208" width="628" height="508" key="find.popup/73.25.1367.875@73.25.1367.875" timestamp="1625439218351" />
+    <state x="446" y="208" width="626" height="508" key="find.popup/77.25.1363.875@77.25.1363.875" timestamp="1625423539244" />
+    <state x="449" y="208" width="624" height="508" key="find.popup/81.25.1359.875@81.25.1359.875" timestamp="1625415665425" />
+  </component>
+</project>
