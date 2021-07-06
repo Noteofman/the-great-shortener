@@ -1,12 +1,11 @@
 import bcrypt from 'bcrypt';
-import {CookieOptions, Request, Response} from 'express';
+import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import StatusCodes from 'http-status-codes';
 
 import User from '@daos/UserDao';
 import { JwtService } from '@shared/JwtService';
 import {
-    paramMissingError,
     loginNotFoundErr,
     registerDuplicateErr,
     loginInvalidCredsErr,
@@ -14,7 +13,7 @@ import {
 import {formatErrors} from "@shared/functions";
 
 const jwtService = new JwtService();
-const { BAD_REQUEST, OK, FORBIDDEN, UNAUTHORIZED } = StatusCodes;
+const { OK, FORBIDDEN, UNAUTHORIZED } = StatusCodes;
 
 /**
  * Register a user and return transformed user.

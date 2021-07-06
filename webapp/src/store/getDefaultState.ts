@@ -11,6 +11,10 @@ export interface State {
   shortenedLinks: Array<LinkObj>
 }
 
+export interface Getters {
+  isAuthenticated: boolean
+}
+
 export default function getDefaultState() : State {
   return {
     isAuthenticated: false,

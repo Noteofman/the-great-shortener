@@ -1,138 +1,124 @@
-import supertest from 'supertest';
-import bcrypt from 'bcrypt';
+import Supertest from 'supertest';
+import mongoose from "mongoose";
+import { MongoMemoryServer } from "mongodb-memory-server";
 import StatusCodes from 'http-status-codes';
-import { SuperTest, Test } from 'supertest';
 
 import app from '@server';
-import UserDao from '@daos/User/UserDao.mock';
-import { User, UserRoles } from '@entities/User';
-import { pwdSaltRounds, cookieProps, loginFailedErr } from '@shared/constants';
-import { pErr } from '@shared/functions';
-import { IReqBody, IResponse } from '../support/types';
+import User from '@daos/UserDao';
+import { headerProps } from '@shared/constants';
 
+const EXISTING_NAME = 'John Test';
+const EXISTING_EMAIL = 'test@example.com';
+const EXISTING_PASSWORD = 'aVEryNicePassWord33';
+
+const existingLoginCredentials = {
+    email: EXISTING_EMAIL,
+    password: EXISTING_PASSWORD,
+};
+
+let mongoDb: MongoMemoryServer;
 
 describe('UserRouter', () => {
 
     const authPath = '/api/auth';
     const loginPath = `${authPath}/login`;
-    const logoutPath = `${authPath}/logout`;
-    const { BAD_REQUEST, OK, UNAUTHORIZED } = StatusCodes;
 
-    let agent: SuperTest<Test>;
+    const createLinkPath = `/api/links/create`;
 
+    const { OK, UNAUTHORIZED, BAD_REQUEST } = StatusCodes;
 
-    beforeAll((done) => {
-        agent = supertest.agent(app);
-        done();
+    beforeAll(async () => {
+
+        mongoDb = await MongoMemoryServer.create();
+
+        const uri = mongoDb.getUri();
+
+        await mongoose.connect(uri);
+
+        const user = new User({
+            email: EXISTING_EMAIL,
+            password: EXISTING_PASSWORD,
+            name: EXISTING_NAME
+        });
+
+        await user.save();
     });
 
+    afterAll(async () => {
+        // Fetch all collections in use.
+        const collections = await mongoose.connection.db.collections();
+
+        try {
+            for (const collection of collections) {
+                await collection.deleteMany({});
+            }
+        } catch(e) {
+            // Dropping all collections can cause potential issues.
+            // with defaults.
+        }
+
+        await mongoose.connection.close();
+
+        await mongoDb.stop();
+    });
 
     describe(`"POST:${loginPath}"`, () => {
+        it(`should return a response with a status of ${UNAUTHORIZED}`,
+            (done) => {
+                const creds = {
+                    email: 'example@gmail.com',
+                    password: 'adecentpasswordhere',
+                };
 
-        const callApi = (reqBody: IReqBody) => {
-            return agent.post(loginPath).type('form').send(reqBody);
-        };
-
-
-        it(`should return a response with a status of ${OK} and a cookie with a jwt if the login
-            was successful.`, (done) => {
-            // Setup Dummy Data
-            const creds = {
-                email: 'jsmith@gmail.com',
-                password: 'Password@1',
-            };
-            const role = UserRoles.Standard;
-            const pwdHash = hashPwd(creds.password);
-            const loginUser = new User('john smith', creds.email, role, pwdHash);
-            spyOn(UserDao.prototype, 'getOne').and.returnValue(Promise.resolve(loginUser));
-            // Call API
-            callApi(creds)
-                .end((err: Error, res: IResponse) => {
-                    pErr(err);
-                    expect(res.status).toBe(OK);
-                    expect(res.headers['set-cookie'][0]).toContain(cookieProps.key);
-                    done();
-                });
-        });
-
-
-        it(`should return a response with a status of ${UNAUTHORIZED} and a json with the error
-            "${loginFailedErr}" if the email was not found.`, (done) => {
-            // Setup Dummy Data
-            const creds = {
-                email: 'jsmith@gmail.com',
-                password: 'Password@1',
-            };
-            spyOn(UserDao.prototype, 'getOne').and.returnValue(Promise.resolve(null));
-            // Call API
-            callApi(creds)
-                .end((err: Error, res: IResponse) => {
-                    pErr(err);
-                    expect(res.status).toBe(UNAUTHORIZED);
-                    expect(res.body.error).toBe(loginFailedErr);
-                    done();
-                });
-        });
-
-
-        it(`should return a response with a status of ${UNAUTHORIZED} and a json with the error
-            "${loginFailedErr}" if the password failed.`, (done) => {
-            // Setup Dummy Data
-            const creds = {
-                email: 'jsmith@gmail.com',
-                password: 'someBadPassword',
-            };
-            const role = UserRoles.Standard;
-            const pwdHash = hashPwd('Password@1');
-            const loginUser = new User('john smith', creds.email, role, pwdHash);
-            spyOn(UserDao.prototype, 'getOne').and.returnValue(Promise.resolve(loginUser));
-            // Call API
-            callApi(creds)
-                .end((err: Error, res: IResponse) => {
-                    pErr(err);
-                    expect(res.status).toBe(UNAUTHORIZED);
-                    expect(res.body.error).toBe(loginFailedErr);
-                    done();
-                });
-        });
-
-
-        it(`should return a response with a status of ${BAD_REQUEST} and a json with an error
-            for all other bad responses.`, (done) => {
-            // Setup Dummy Data
-            const creds = {
-                email: 'jsmith@gmail.com',
-                password: 'someBadPassword',
-            };
-            spyOn(UserDao.prototype, 'getOne').and.throwError('Database query failed.');
-            // Call API
-            callApi(creds)
-                .end((err: Error, res: IResponse) => {
-                    pErr(err);
-                    expect(res.status).toBe(BAD_REQUEST);
-                    expect(res.body.error).toBeTruthy();
-                    done();
-                });
-        });
+                Supertest(app)
+                    .post(loginPath).send(creds)
+                    .then((response: Supertest.Response) => {
+                        expect(response.status).toBe(UNAUTHORIZED);
+                        expect(response.headers[headerProps.key]).toBeFalsy();
+                        done();
+                    })
+            });
     });
 
-
-    describe(`"GET:${logoutPath}"`, () => {
-
-
-        it(`should return a response with a status of ${OK}.`, (done) => {
-            agent.get(logoutPath)
-                .end((err: Error, res: IResponse) => {
-                    pErr(err);
-                    expect(res.status).toBe(OK);
-                    done();
-                });
-        });
+    describe(`"POST:${loginPath}"`, () => {
+        it(`should return a response with a status of ${OK} with a JWT body response`,
+            (done) => {
+                Supertest(app)
+                    .post(loginPath).send(existingLoginCredentials)
+                    .then((response: Supertest.Response) => {
+                        expect(response.status).toBe(OK);
+                        expect(response.body["jwt"]).toBeTruthy();
+                        done();
+                    })
+            });
     });
 
+    describe(`"POST:${createLinkPath}"`, () => {
+        it(`should login and then use session to create link`,
+            async () => {
+                const loginReq = await Supertest(app)
+                    .post(loginPath).send(existingLoginCredentials);
 
-    function hashPwd(pwd: string) {
-        return bcrypt.hashSync(pwd, pwdSaltRounds);
-    }
+                const jwt = loginReq.body["jwt"];
+
+                expect("jwt").toBeTruthy();
+
+                await Supertest(app)
+                    .post(createLinkPath).send({ "url": "https://google.com" }).expect(OK);
+
+            });
+    });
+
+    describe(`"POST:${createLinkPath}"`, () => {
+        it(`should login and then use session to create a bad link`,
+            async () => {
+                await Supertest(app)
+                    .post(loginPath).send(existingLoginCredentials);
+
+                await Supertest(app)
+                    .post(createLinkPath).send({ "url": "httgrgoogleg/p4m" }).expect(BAD_REQUEST);
+
+            });
+    });
 });
 

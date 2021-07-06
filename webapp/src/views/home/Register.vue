@@ -10,6 +10,7 @@
         v-model="name"
         title="e.g John Smith"
         label="Your full name"
+        :error="nameError"
       />
     </div>
     <div class="form-group flex-col flex-align-center">
@@ -19,14 +20,16 @@
         title="example@something.com"
         label="Your email-address"
         type="email"
+        :error="emailError"
       />
     </div>
     <div class="form-group flex-col flex-align-center">
       <InputField
         v-model="password"
         id="register-password"
-        label="Your password"
+        label="Your password (min 5 characters)"
         type="password"
+        :error="passwordError"
       />
     </div>
     <button type="submit" @click.prevent="onRegister" class="btn primary-btn margin-top-3">
@@ -39,14 +42,16 @@
 <script lang="ts">
 
 import { defineComponent } from 'vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { RegisterFormData } from '@/types';
 import InputField from '@/components/InputField.vue';
+import { commonEmailValidation, commonPasswordValidation } from '@/utils/commonValidators';
 
 interface RegisterData {
   name: string,
   password: string,
   email: string,
+  boom: string,
 }
 
 export default defineComponent({
@@ -61,6 +66,30 @@ export default defineComponent({
       email: '',
     } as RegisterData;
   },
+  computed: {
+    ...mapGetters({ isAuthenticated: 'isAuthenticated' }),
+    nameError(): string | null {
+      let error = null;
+
+      if (!this.name) { error = 'The name field is required.'; }
+      if (this.name && this.name.length > 100) { error = 'Name cannot be more than 100 characters.'; }
+
+      return error;
+    },
+    emailError(): string | null {
+      return commonEmailValidation(this.email);
+    },
+    passwordError(): string | null {
+      return commonPasswordValidation(this.password);
+    },
+    allowSubmit(): boolean {
+      return !this.nameError && !this.passwordError && !this.emailError;
+    },
+  },
+  created() {
+    // TODO move this type of logic into router middleware.
+    if (this.isAuthenticated) this.$router.push('/');
+  },
   methods: {
     async onRegister() {
       const payload: RegisterFormData = {
@@ -68,6 +97,8 @@ export default defineComponent({
         password: this.password,
         name: this.name,
       };
+
+      if (!this.allowSubmit) return;
 
       const user = await this.registerUser(payload);
 

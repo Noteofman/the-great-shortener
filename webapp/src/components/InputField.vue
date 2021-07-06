@@ -15,6 +15,9 @@
     <label class="form-label" :for="id">
       {{ label }}
     </label>
+    <p v-if="error" class="form-error">
+      {{ error }}
+    </p>
   </div>
 </template>
 
@@ -39,6 +42,11 @@ export default defineComponent({
       default: null,
     },
     title: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    error: {
       type: String,
       required: false,
       default: null,

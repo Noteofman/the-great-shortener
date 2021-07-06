@@ -46,9 +46,9 @@ const store = createStore<State>({
       state.shortenedLinks = [];
     },
     setShortenedLinks(state, payload: Array<LinkObj>) {
-      const concat: Array<LinkObj> = [...state.shortenedLinks, ...payload];
+      let concat: Array<LinkObj> = [...state.shortenedLinks, ...payload];
 
-      concat.filter((v, i, a) => a.findIndex(
+      concat = concat.filter((v, i, a) => a.findIndex(
         (t) => (t.linkId === v.linkId),
       ) === i);
 
@@ -152,9 +152,8 @@ const store = createStore<State>({
   },
 });
 
-store.dispatch('setupAuthedUser', {
-  user: store.getters.userData,
-  jwt: store.getters.jwt,
-} as UserResponse);
+if (store.getters.isAuthenticated) {
+  setupClient(store.getters.jwt);
+}
 
 export default store;

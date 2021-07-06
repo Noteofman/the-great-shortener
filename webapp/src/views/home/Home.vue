@@ -11,6 +11,7 @@
             id="long-link"
             :label="!activeLink ? 'Your super long link' : 'Your very short link'"
             :default-spacing="false"
+            :error="urlError"
           />
         </div>
         <a
@@ -84,6 +85,7 @@ import { LinkFormData, LinkObj } from '@/types';
 import InputField from '@/components/InputField.vue';
 import clipboardInactiveSrc from '@/assets/clipboard-list-solid.svg';
 import clipboardActiveSrc from '@/assets/clipboard-check-solid.svg';
+import { commonUrlValidation } from '@/utils/commonValidators';
 
 interface Home {
   url: string,
@@ -91,6 +93,7 @@ interface Home {
   copiedId: string | null,
   clipboardInactiveSrc: string,
   clipboardActiveSrc: string,
+  urlError: string | null,
 }
 
 export default defineComponent({
@@ -105,6 +108,7 @@ export default defineComponent({
       copiedId: null,
       clipboardInactiveSrc,
       clipboardActiveSrc,
+      urlError: null,
     } as Home;
   },
   computed: {
@@ -120,10 +124,21 @@ export default defineComponent({
   methods: {
     ...mapActions({ registerUser: 'registerUser', createLink: 'createLink' }),
     async onLinkSubmit() {
-      const activeLink = await this.$store.dispatch('createLink', { url: this.url } as LinkFormData);
+      console.log(this.url);
+      const error = commonUrlValidation(this.url);
 
-      this.url = activeLink.shortenedLink;
-      this.activeLink = activeLink;
+      console.log('error is ', error);
+
+      if (error) {
+        this.urlError = error;
+      } else {
+        this.urlError = null;
+
+        const activeLink = await this.$store.dispatch('createLink', { url: this.url } as LinkFormData);
+
+        this.url = activeLink.shortenedLink;
+        this.activeLink = activeLink;
+      }
     },
     onCopyClipboard(link: LinkObj) {
       this.copiedId = link.linkId;
